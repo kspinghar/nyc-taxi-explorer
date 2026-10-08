@@ -1,5 +1,5 @@
 """
-app.py — NYC Taxi query explorer.
+app.py: NYC Taxi query explorer.
 
 Each query in QUERIES is a small dict with the SQL, the source table, and a
 chart hint. The app runs the SQL against the bundled SQLite sample and
@@ -57,10 +57,10 @@ QUERIES = {
         "db": "yellow",
         "sql": (
             "SELECT CASE "
-            " WHEN trip_distance < 1 THEN '0–1 mi' "
-            " WHEN trip_distance < 3 THEN '1–3 mi' "
-            " WHEN trip_distance < 5 THEN '3–5 mi' "
-            " WHEN trip_distance < 10 THEN '5–10 mi' "
+            " WHEN trip_distance < 1 THEN '0-1 mi' "
+            " WHEN trip_distance < 3 THEN '1-3 mi' "
+            " WHEN trip_distance < 5 THEN '3-5 mi' "
+            " WHEN trip_distance < 10 THEN '5-10 mi' "
             " ELSE '10+ mi' END AS distance_bin, "
             "ROUND(AVG(fare_amount), 2) AS avg_fare, "
             "COUNT(*) AS trips "
@@ -104,7 +104,7 @@ QUERIES = {
         "chart": "bar",
         "x": "day_type",
         "y": "trip_count",
-        "title": "Yellow-taxi trip counts — weekend vs weekday",
+        "title": "Yellow-taxi trip counts: weekend vs weekday",
     },
     "Average fare for trips > 10 miles (yellow)": {
         "db": "yellow",
@@ -117,7 +117,7 @@ QUERIES = {
             "WHERE trip_distance > 10"
         ),
         "chart": "table",
-        "title": "Yellow-taxi long trips (>10 mi) — averages",
+        "title": "Yellow-taxi long trips (>10 mi): averages",
     },
     "Most common payment method (yellow)": {
         "db": "yellow",
@@ -132,7 +132,7 @@ QUERIES = {
         "value": "trips",
         "title": "Yellow-taxi payment methods (1 = credit card · 2 = cash · 3 = no charge · 4 = dispute)",
     },
-    "Yellow vs Green — average fare & trip count": {
+    "Yellow vs Green: average fare & trip count": {
         "db": "both",
         "sql": (
             "SELECT 'Yellow' AS taxi_type, COUNT(*) AS trips, "
@@ -146,7 +146,7 @@ QUERIES = {
         "chart": "bar",
         "x": "taxi_type",
         "y": "avg_fare",
-        "title": "Yellow vs Green — average fare per trip",
+        "title": "Yellow vs Green: average fare per trip",
     },
 }
 
@@ -184,7 +184,7 @@ def _render_chart(df, q):
     title = q.get("title", "")
 
     if chart == "table":
-        # No chart — return None for image.
+        # No chart: return None for image.
         return None
 
     fig, ax = plt.subplots(figsize=(8, 4.5))
@@ -238,9 +238,9 @@ def run_query(query_name):
 with gr.Blocks(theme=gr.themes.Soft(), title="NYC Taxi Query Explorer") as demo:
     gr.Markdown(
         "# NYC Taxi Query Explorer\n"
-        "Replay of EDA queries from a PySpark coursework pipeline. Pick a pre-built query — "
+        "Replay of EDA queries from a PySpark coursework pipeline. Pick a pre-built query; "
         "the app runs it against the bundled SQLite samples and shows the SQL, the result table, "
-        "and a chart. The original pipeline ran the same logic on Spark over 2020–2024 Parquet "
+        "and a chart. The original pipeline ran the same logic on Spark over 2020-2024 Parquet "
         "ingest; what you're querying here is the persisted SQLite output."
     )
 
